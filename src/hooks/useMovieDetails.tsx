@@ -13,14 +13,14 @@ export const useMovieDetails = (movieID: number) => {
   const [state, setState] = useState<MovieDetails>({
       isLoading: true,
       movieFull: undefined,
-      cast: []
+      cast: [],
   });
 
   const getMovieDetails = async () => {
     const movieDetailsPromise = movieDB.get<MovieFull>(`/${movieID}`);
     const castPromise = movieDB.get<CreditsResponse>(`/${movieID}/credits`);
 
-    const [movieDetailsResponse, castPromiseResponse] = await Promise.all([
+    const [ movieDetailsResponse, castPromiseResponse ] = await Promise.all([
       movieDetailsPromise,
       castPromise,
     ]);
