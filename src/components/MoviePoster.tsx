@@ -3,7 +3,6 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Movie } from '../interfaces/movieInterface';
-import  {DetailScreen}  from '../screens/DetailScreen';
 
 interface Props {
   movie: Movie;
