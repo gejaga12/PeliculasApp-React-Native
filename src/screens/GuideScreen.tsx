@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const channels = [
   'Channel 1',
@@ -11,7 +12,19 @@ const channels = [
   'Channel 7',
   'Channel 8',
   'Channel 9',
+  'Channel 11',
+  'Channel 12',
+  'Channel 13',
   'Channel 10',
+  'Channel 3',
+  'Channel 14',
+  'Channel 12',
+  'Channel 11',
+  'Channel 15',
+  'Channel 16',
+  'Channel 17',
+  'Channel 18',
+  'Channel 19',
 ];
 
 const hours = Array.from(Array(24), (_, index) => index).map((hour) => {
@@ -21,84 +34,89 @@ const hours = Array.from(Array(24), (_, index) => index).map((hour) => {
 
 const GuideScreen = () => {
   return (
-    <ScrollView horizontal>
-      <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.channelsContainer} showsVerticalScrollIndicator={false}>
-          {channels.map((channel, index) => (
-            <TouchableOpacity key={index} style={styles.channelItem}>
-              <Text style={styles.channelText}>{channel}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-        <ScrollView contentContainerStyle={styles.programContainer} horizontal>
-          <View style={styles.timeContainer}>
-            {hours.map((hour, index) => (
-              <View key={index} style={styles.timeItem}>
-                <Text style={styles.timeText}>{hour}</Text>
-              </View>
+    <View style={styles.container}>
+      <ScrollView horizontal>
+        <View style={styles.contentContainer}>
+          <ScrollView style={styles.channelsContainer} contentContainerStyle={styles.channelsContent}>
+            {channels.map((channel, index) => (
+              <TouchableOpacity key={index} style={styles.channelItem}>
+                <Text style={styles.channelText}>{channel}</Text>
+              </TouchableOpacity>
             ))}
-          </View>
-          <View style={styles.programContent}>
+          </ScrollView>
+          <ScrollView contentContainerStyle={styles.programContainer} horizontal>
+            <View style={styles.timeContainer}>
+              {hours.map((hour, index) => (
+                <View key={index} style={styles.timeItem}>
+                  <Text style={styles.timeText}>{hour}</Text>
+                </View>
+              ))}
+            </View>
             {channels.map((channel, channelIndex) => (
               <View key={channelIndex} style={styles.programRow}>
                 {hours.map((hour, hourIndex) => (
                   <TouchableOpacity key={hourIndex} style={styles.programItem} onPress={() => handleCellPress(channel, hour)}>
-               
+                    {/* Aquí puedes colocar el contenido de las celdas de programación */}
                   </TouchableOpacity>
                 ))}
               </View>
             ))}
-          </View>
-        </ScrollView>
-      </View>
-    </ScrollView>
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
-const handleCellPress = (channel: any, hour: any) => {
+const handleCellPress = (channel, hour) => {
   // Lógica para manejar el evento de clic en una celda de programación
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  contentContainer: {
     flexDirection: 'row',
   },
   channelsContainer: {
-    flexDirection: 'column',
+    width: 120,
+  },
+  channelsContent: {
+    flexGrow: 1,
+    
+
   },
   channelItem: {
     height: 50,
     justifyContent: 'center',
     borderBottomWidth: 1,
     borderColor: 'gray',
+    position: 'relative',
+    zIndex: 1,
+    
   },
   channelText: {
     fontSize: 16,
     marginLeft: 10,
   },
   programContainer: {
-    flex: 1,
     flexDirection: 'column',
   },
   timeContainer: {
     flexDirection: 'row',
-    borderTopWidth: 1,
-    borderColor: 'gray',
   },
   timeItem: {
-    flex: 1,
+    width: 100,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRightWidth: 1,
+    borderBottomWidth: 1,
     borderColor: 'gray',
   },
   timeText: {
     fontSize: 14,
-  },
-  programContent: {
-    flex: 1,
-    flexDirection: 'column',
   },
   programRow: {
     flexDirection: 'row',
@@ -106,7 +124,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
   },
   programItem: {
-    flex: 1,
+    width: 100,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',

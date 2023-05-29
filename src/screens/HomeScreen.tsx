@@ -10,8 +10,9 @@ import { Movie } from '../interfaces/movieInterface';
 
 const { width: windowWidth } = Dimensions.get('window');
 
-export const HomeScreen = ( {movie}: Props ) => {
+export const HomeScreen = ({ movie }: Props) => {
   const { top } = useSafeAreaInsets();
+  const navigation = useNavigation();
   const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
 
   if (isLoading) {
@@ -21,18 +22,13 @@ export const HomeScreen = ( {movie}: Props ) => {
       </View>
     );
   }
-  
-  const navigation = useNavigation();
 
   return (
-
-    
     <ScrollView>
-      <View style={{backgroundColor: 'black', alignItems: 'center', paddingVertical: 10, }}>
-        <TouchableOpacity
-        onPress={() => navigation.navigate("GuideScreen" , movie)}>
-          <Text style={{fontWeight: '900', fontSize: 30,backgroundColor: 'green', color: 'black', paddingHorizontal: 5, paddingVertical: 2, borderRadius: 10}}>GUIDE</Text>
-          </TouchableOpacity>
+      <View style={{ backgroundColor: 'black', alignItems: 'center', paddingVertical: 10 }}>
+        <TouchableOpacity onPress={() => navigation.navigate("GuideScreen", movie)}>
+          <Text style={{ fontWeight: '900', fontSize: 30, backgroundColor: 'green', color: 'black', paddingHorizontal: 5, paddingVertical: 2, borderRadius: 10 }}>GUIDE</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={{ marginTop: top + 15 }}>
